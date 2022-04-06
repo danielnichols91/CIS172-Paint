@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.Color;
 
-public class Frame extends JFrame{
+public class Frame extends JFrame {
 	
 	public Frame() {
 		this.setTitle("Paint");

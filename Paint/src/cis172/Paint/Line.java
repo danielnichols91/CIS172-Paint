@@ -4,10 +4,6 @@ import java.awt.Graphics;
 
 public class Line extends Shape{
 
-	private int x;
-	private int y; 
-	private int height;
-	private int width; 
 	//angle? two end points?
 	
 	@Override

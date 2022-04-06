@@ -5,7 +5,17 @@ import javax.swing.JPanel;
 
 public class Picture extends JPanel{
 	
+	enum ToolOpt {
+		RECTANGLE,
+		CIRCLE,
+		LINE,
+		TRIANGLE,
+		ERASER,
+		PAINTCAN
+	}
+	
 	private ArrayList<Shape> shapes;
+	private ToolOpt currentTool;
 	
 	public Picture() {
 		shapes = new ArrayList<Shape>(); 
