@@ -4,13 +4,16 @@ import java.awt.Graphics;
 
 public abstract class Shape {
 	
+	// List the attributes needed to draw shapes
 	private int x;
 	private int y; 
 	private int height;
 	private int width; 
 	
+	//Abstract method to be implemented later
 	public abstract void draw(Graphics g); 
 	
+	// Getters and setters for private attributes
 	public int getX() {
 		return x;
 	}
