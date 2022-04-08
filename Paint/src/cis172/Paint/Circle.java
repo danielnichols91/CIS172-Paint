@@ -7,7 +7,7 @@ public class Circle extends Shape{
 	
 	@Override
 	public void draw(Graphics g) {
-		// TODO Draw circle by clicking and dragging 
+		g.drawOval(getX(), getY(), getWidth(), getHeight());
 		
 	}
 
