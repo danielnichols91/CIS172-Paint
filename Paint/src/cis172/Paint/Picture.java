@@ -146,6 +146,12 @@ public class Picture extends JPanel {
 				
 			});
 			
+		} else if (currentTool == ToolOpt.PAINTCAN) {
+			addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					setBackground(currentColor);
+				}
+			});
 		}
 		
 	}
