@@ -31,10 +31,12 @@ public class Picture extends JPanel {
 		// Give default values to attributes
 		shapes = new ArrayList<Shape>();
 		currentColor = Color.black;
-		currentWidth=10;
+		currentWidth= 5;
 		currentTool = null; 
 		// I haven't figured out how to get the if statements to work, yet, 
 		// so I've been just changing currentTool to whatever tool I need to test
+		
+		System.out.println("currentTool: " + this.currentTool); // Testing purposes
 		
 		if (currentTool == ToolOpt.RECTANGLE) { 
 			Rectangle r1 = new Rectangle();
@@ -61,6 +63,8 @@ public class Picture extends JPanel {
 					}
 					
 					shapes.add(r1);
+					r1.setThickness(currentWidth);
+					r1.setColor(currentColor);
 					r1.draw(getGraphics());
 				}
 				
@@ -92,6 +96,8 @@ public class Picture extends JPanel {
 					}
 					
 					shapes.add(c1);
+					c1.setThickness(currentWidth);
+					c1.setColor(currentColor);
 					c1.draw(getGraphics());
 				}
 				
@@ -112,6 +118,8 @@ public class Picture extends JPanel {
 					l1.setHeight(e.getY());
 					
 					shapes.add(l1);
+					l1.setThickness(currentWidth);
+					l1.setColor(currentColor);
 					l1.draw(getGraphics());
 				}
 				
@@ -131,6 +139,8 @@ public class Picture extends JPanel {
 					t1.setHeight(e.getY());
 					
 					shapes.add(t1);
+					t1.setThickness(currentWidth);
+					t1.setColor(currentColor);
 					t1.draw(getGraphics());
 				}
 				

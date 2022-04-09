@@ -1,5 +1,6 @@
 package cis172.Paint;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Shape {
@@ -9,12 +10,14 @@ public abstract class Shape {
 	private int y; 
 	private int height;
 	private int width; 
+	private Color color;
+	private int thickness;
 	
 	//Abstract method to be implemented later
 	public abstract void draw(Graphics g); 
 	
 	// Getters and setters for private attributes
-	public int getX() {
+	public int getX() {;
 		return x;
 	}
 
@@ -45,6 +48,24 @@ public abstract class Shape {
 	public void setWidth(int width) {
 		this.width = width;
 	}
+	
+	public Color getColor() {
+		return color;
+	}
+	
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
+	public int getThickness() {
+		return thickness;
+	}
+	
+	public void setThickness(int thickness) {
+		this.thickness = thickness;
+	}
+	
+
 
 
 	
