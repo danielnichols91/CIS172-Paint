@@ -33,6 +33,8 @@ public class Picture extends JPanel {
 		currentColor = Color.black;
 		currentWidth=10;
 		currentTool = null; 
+		// I haven't figured out how to get the if statements to work, yet, 
+		// so I've been just changing currentTool to whatever tool I need to test
 		
 		if (currentTool == ToolOpt.RECTANGLE) { 
 			Rectangle r1 = new Rectangle();
@@ -41,16 +43,25 @@ public class Picture extends JPanel {
 				public void mousePressed(MouseEvent e) {
 					r1.setX(e.getX());
 					r1.setY(e.getY());
-					
 				}
 				
 				public void mouseReleased(MouseEvent e) {
-					r1.setWidth(e.getX() - r1.getX());
-					r1.setHeight(e.getY() - r1.getY());
+					if (r1.getX() > e.getX()) {
+						r1.setWidth(r1.getX() - e.getX());
+						r1.setX(e.getX());
+					} else {
+						r1.setWidth(e.getX() - r1.getX());
+					}
+					
+					if (r1.getY() > e.getY()) {
+						r1.setHeight(r1.getY() - e.getY());
+						r1.setY(e.getY());
+					} else {
+						r1.setHeight(e.getY() - r1.getY());
+					}
 					
 					shapes.add(r1);
 					r1.draw(getGraphics());
-					
 				}
 				
 			});
@@ -63,20 +74,67 @@ public class Picture extends JPanel {
 				public void mousePressed(MouseEvent e) {
 					c1.setX(e.getX());
 					c1.setY(e.getY());
-					
 				}
 				
 				public void mouseReleased(MouseEvent e) {
-					c1.setWidth(e.getX() - c1.getX());
-					c1.setHeight(e.getY() - c1.getY());
+					if (c1.getX() > e.getX()) {
+						c1.setWidth(c1.getX() - e.getX());
+						c1.setX(e.getX());
+					} else {
+						c1.setWidth(e.getX() - c1.getX());
+					}
+					
+					if (c1.getY() > e.getY()) {
+						c1.setHeight(c1.getY() - e.getY());
+						c1.setY(e.getY());
+					} else {
+						c1.setHeight(e.getY() - c1.getY());
+					}
 					
 					shapes.add(c1);
 					c1.draw(getGraphics());
-					
 				}
 				
 			});
 			
+			
+		} else if (currentTool == ToolOpt.LINE) {
+			Line l1 = new Line();
+			
+			addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					l1.setX(e.getX());
+					l1.setY(e.getY());
+				}
+				
+				public void mouseReleased(MouseEvent e) {
+					l1.setWidth(e.getX());
+					l1.setHeight(e.getY());
+					
+					shapes.add(l1);
+					l1.draw(getGraphics());
+				}
+				
+			});
+			
+		} else if (currentTool == ToolOpt.TRIANGLE) {
+			Triangle t1 = new Triangle();
+			
+			addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					t1.setX(e.getX());
+					t1.setY(e.getY());
+				}
+				
+				public void mouseReleased(MouseEvent e) {
+					t1.setWidth(e.getX());
+					t1.setHeight(e.getY());
+					
+					shapes.add(t1);
+					t1.draw(getGraphics());
+				}
+				
+			});
 			
 		}
 		
