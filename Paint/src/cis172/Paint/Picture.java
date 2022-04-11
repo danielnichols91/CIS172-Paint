@@ -38,6 +38,9 @@ public class Picture extends JPanel {
 		
 		System.out.println("currentTool: " + this.currentTool); // Testing purposes
 		
+	}
+	
+	public void chooseTool() {
 		if (currentTool == ToolOpt.RECTANGLE) { 
 			Rectangle r1 = new Rectangle();
 			
@@ -153,8 +156,8 @@ public class Picture extends JPanel {
 				}
 			});
 		}
-		
 	}
+	
 	
 	public void export() {
 		// TODO: export image to a BMP, JPG, PNG, or other image format
@@ -188,7 +191,6 @@ public class Picture extends JPanel {
 	public void setCurrentWidth(int currentWidth) {
 		this.currentWidth = currentWidth; 
 	}
-	
 	
 	
 }

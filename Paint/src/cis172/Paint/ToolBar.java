@@ -159,6 +159,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		if(e.getSource()==circleBtn) {
 			// Set the currentTool to CIRCLE
 			Frame.getPicture().setCurrentTool(ToolOpt.CIRCLE);
+			Frame.getPicture().chooseTool();
 			// Highlight the border of the selected tool 
 			circleBtn.setBorderPainted(true);
 			rectangleBtn.setBorderPainted(false);
@@ -170,6 +171,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		else if (e.getSource()== rectangleBtn) {
 			// Set the currentTool to RECTANGLE
 			Frame.getPicture().setCurrentTool(ToolOpt.RECTANGLE);
+			Frame.getPicture().chooseTool();
 			// Highlight the border of the selected tool 
 			circleBtn.setBorderPainted(false);
 			rectangleBtn.setBorderPainted(true);
@@ -181,6 +183,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		else if (e.getSource()== triangleBtn) {
 			// Set the currentTool to TRIANGLE
 			Frame.getPicture().setCurrentTool(ToolOpt.TRIANGLE);
+			Frame.getPicture().chooseTool();
 			// Highlight the border of the selected tool 
 			circleBtn.setBorderPainted(false);
 			rectangleBtn.setBorderPainted(false);
@@ -192,6 +195,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		else if (e.getSource()== lineBtn) {
 			// Set the currentTool to LINE
 			Frame.getPicture().setCurrentTool(ToolOpt.LINE);
+			Frame.getPicture().chooseTool();
 			// Highlight the border of the selected tool 
 			circleBtn.setBorderPainted(false);
 			rectangleBtn.setBorderPainted(false);
@@ -203,6 +207,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		else if (e.getSource()== eraserBtn) {
 			// Set the currentTool to ERASER
 			Frame.getPicture().setCurrentTool(ToolOpt.ERASER);
+			Frame.getPicture().chooseTool();
 			// Highlight the border of the selected tool 
 			circleBtn.setBorderPainted(false);
 			rectangleBtn.setBorderPainted(false);
@@ -218,6 +223,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		else if (e.getSource()== paintCanBtn) {
 			// Set the currentTool to PAINTCAN
 			Frame.getPicture().setCurrentTool(ToolOpt.PAINTCAN);
+			Frame.getPicture().chooseTool();
 			// Highlight the border of the selected tool 
 			circleBtn.setBorderPainted(false);
 			rectangleBtn.setBorderPainted(false);

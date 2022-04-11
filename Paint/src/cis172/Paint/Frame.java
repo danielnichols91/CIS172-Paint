@@ -37,7 +37,6 @@ public class Frame extends JFrame {
 		
 		// Set the visibility to true
 		this.setVisible(true);
-		
 			
 			
 	}
