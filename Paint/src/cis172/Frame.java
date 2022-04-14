@@ -30,7 +30,7 @@ public class Frame extends JFrame {
 		this.add(picture,BorderLayout.CENTER);
 		
 		// Declare an instance of ToolBar and format it
-		ToolBar toolBar = new ToolBar();
+		ToolBar toolBar = new ToolBar(picture);
 		toolBar.setPreferredSize(new Dimension(800, 100));
 		toolBar.setBackground(Color.lightGray);
 		this.add(toolBar,BorderLayout.NORTH);
@@ -42,9 +42,7 @@ public class Frame extends JFrame {
 	}
 
 		
-	public static Picture getPicture() {
-		return picture;
-	}
+	
 	
 
 

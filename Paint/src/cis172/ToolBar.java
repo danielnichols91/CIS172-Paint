@@ -16,6 +16,8 @@ import cis172.Paint.Picture.ToolOpt;
 
 public class ToolBar extends JPanel implements ActionListener{
 
+	private Picture picture;
+	
 	// Define all of the components for the toolBar
 	private JButton circleBtn;
 	private JButton triangleBtn;
@@ -28,7 +30,9 @@ public class ToolBar extends JPanel implements ActionListener{
 	private JButton selectColorBtn;
 	private JPanel currentColorDisplay;
 	
-	public ToolBar() {
+	public ToolBar(Picture picture) {
+		this.picture = picture; 
+		
 		// Format the circle button 
 		circleBtn = new JButton();
 		circleBtn.setPreferredSize(new Dimension(50,50));
@@ -137,7 +141,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		selectColorBtn.addActionListener(this);
 		currentColorDisplay = new JPanel();
 		currentColorDisplay.setSize(new Dimension(40,40));
-		currentColorDisplay.setBackground(Frame.getPicture().getCurrentColor());
+		currentColorDisplay.setBackground(picture.getCurrentColor());
 		selectColorBtn.add(currentColorDisplay);
 		selectColorBtn.setToolTipText("Click select a color to use");
 		
@@ -156,110 +160,83 @@ public class ToolBar extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==circleBtn) {
-			// Set the currentTool to CIRCLE
-			Frame.getPicture().setCurrentTool(ToolOpt.CIRCLE);
-			Frame.getPicture().chooseTool();
-			// Highlight the border of the selected tool 
-			circleBtn.setBorderPainted(true);
-			rectangleBtn.setBorderPainted(false);
-			triangleBtn.setBorderPainted(false);
-			lineBtn.setBorderPainted(false);
-			eraserBtn.setBorderPainted(false);
-			paintCanBtn.setBorderPainted(false);
-		}
-		else if (e.getSource()== rectangleBtn) {
-			// Set the currentTool to RECTANGLE
-			Frame.getPicture().setCurrentTool(ToolOpt.RECTANGLE);
-			Frame.getPicture().chooseTool();
-			// Highlight the border of the selected tool 
-			circleBtn.setBorderPainted(false);
-			rectangleBtn.setBorderPainted(true);
-			triangleBtn.setBorderPainted(false);
-			lineBtn.setBorderPainted(false);
-			eraserBtn.setBorderPainted(false);
-			paintCanBtn.setBorderPainted(false);
-		}
-		else if (e.getSource()== triangleBtn) {
-			// Set the currentTool to TRIANGLE
-			Frame.getPicture().setCurrentTool(ToolOpt.TRIANGLE);
-			Frame.getPicture().chooseTool();
-			// Highlight the border of the selected tool 
-			circleBtn.setBorderPainted(false);
-			rectangleBtn.setBorderPainted(false);
-			triangleBtn.setBorderPainted(true);
-			lineBtn.setBorderPainted(false);
-			eraserBtn.setBorderPainted(false);
-			paintCanBtn.setBorderPainted(false);
-		}
-		else if (e.getSource()== lineBtn) {
-			// Set the currentTool to LINE
-			Frame.getPicture().setCurrentTool(ToolOpt.LINE);
-			Frame.getPicture().chooseTool();
-			// Highlight the border of the selected tool 
-			circleBtn.setBorderPainted(false);
-			rectangleBtn.setBorderPainted(false);
-			triangleBtn.setBorderPainted(false);
-			lineBtn.setBorderPainted(true);
-			eraserBtn.setBorderPainted(false);
-			paintCanBtn.setBorderPainted(false);
-		}
-		else if (e.getSource()== eraserBtn) {
-			// Set the currentTool to ERASER
-			Frame.getPicture().setCurrentTool(ToolOpt.ERASER);
-			Frame.getPicture().chooseTool();
-			// Highlight the border of the selected tool 
-			circleBtn.setBorderPainted(false);
-			rectangleBtn.setBorderPainted(false);
-			triangleBtn.setBorderPainted(false);
-			lineBtn.setBorderPainted(false);
-			eraserBtn.setBorderPainted(true);
-			paintCanBtn.setBorderPainted(false);
-		}
-		else if (e.getSource()== exportBtn) {
-			// Call the export function in the Picture class 
-			Frame.getPicture().export();
-		}
-		else if (e.getSource()== paintCanBtn) {
-			// Set the currentTool to PAINTCAN
-			Frame.getPicture().setCurrentTool(ToolOpt.PAINTCAN);
-			Frame.getPicture().chooseTool();
-			// Highlight the border of the selected tool 
-			circleBtn.setBorderPainted(false);
-			rectangleBtn.setBorderPainted(false);
-			triangleBtn.setBorderPainted(false);
-			lineBtn.setBorderPainted(false);
-			eraserBtn.setBorderPainted(false);
-			paintCanBtn.setBorderPainted(true);
-		}
-		else if (e.getSource()==thicknessMenu) {
+
+		if (e.getSource()==thicknessMenu) {
 			// Changes the current thickness which will be used for every shape and the eraser
 			if(thicknessMenu.getSelectedIndex()==0) {
-				Frame.getPicture().setCurrentWidth(5);
+				picture.setCurrentWidth(5);
 			}
 			else if(thicknessMenu.getSelectedIndex()==1) {
-				Frame.getPicture().setCurrentWidth(10);
+				picture.setCurrentWidth(10);
 			}
 			else if(thicknessMenu.getSelectedIndex()==2) {
-				Frame.getPicture().setCurrentWidth(15);
+				picture.setCurrentWidth(15);
 			}
 			else if(thicknessMenu.getSelectedIndex()==3) {
-				Frame.getPicture().setCurrentWidth(20);
+				picture.setCurrentWidth(20);
 			}
 			else if(thicknessMenu.getSelectedIndex()==4) {
-				Frame.getPicture().setCurrentWidth(25);
+				picture.setCurrentWidth(25);
 			}
 			
 		}
 		else if (e.getSource()==selectColorBtn) {
 			// Gets Color from user input and sets the currentColor equal to that color
 			Color color = JColorChooser.showDialog(this,
-                    "Select a color", Frame.getPicture().getCurrentColor());
-			Frame.getPicture().setCurrentColor(color);
+                    "Select a color", picture.getCurrentColor());
+			picture.setCurrentColor(color);
 			currentColorDisplay.setBackground(color);
+		} else {
+			
+			// Deselect all tools
+			circleBtn.setBorderPainted(false);
+			rectangleBtn.setBorderPainted(false);
+			triangleBtn.setBorderPainted(false);
+			lineBtn.setBorderPainted(false);
+			eraserBtn.setBorderPainted(false);
+			paintCanBtn.setBorderPainted(false);
+			
+			if(e.getSource()==circleBtn) {
+				// Set the currentTool to CIRCLE
+				picture.setCurrentTool(ToolOpt.CIRCLE);
+				// Highlight the border of the selected tool 
+				circleBtn.setBorderPainted(true);
+			}
+			else if (e.getSource()== rectangleBtn) {
+				// Set the currentTool to RECTANGLE
+				picture.setCurrentTool(ToolOpt.RECTANGLE);
+				// Highlight the border of the selected tool 
+				rectangleBtn.setBorderPainted(true);
+			}
+			else if (e.getSource()== triangleBtn) {
+				// Set the currentTool to TRIANGLE
+				picture.setCurrentTool(ToolOpt.TRIANGLE);
+				// Highlight the border of the selected tool 
+				triangleBtn.setBorderPainted(true);
+			}
+			else if (e.getSource()== lineBtn) {
+				// Set the currentTool to LINE
+				picture.setCurrentTool(ToolOpt.LINE);
+				// Highlight the border of the selected tool 
+				lineBtn.setBorderPainted(true);
+			}
+			else if (e.getSource()== eraserBtn) {
+				// Set the currentTool to ERASER
+				picture.setCurrentTool(ToolOpt.ERASER);
+				// Highlight the border of the selected tool 
+				eraserBtn.setBorderPainted(true);
+			}
+			else if (e.getSource()== exportBtn) {
+				// Call the export function in the Picture class 
+				picture.export();
+			}
+			else if (e.getSource()== paintCanBtn) {
+				// Set the currentTool to PAINTCAN
+				picture.setCurrentTool(ToolOpt.PAINTCAN);
+				// Highlight the border of the selected tool 
+				paintCanBtn.setBorderPainted(true);
+			}
 		}
-		
-		
 	}
 	
 	
