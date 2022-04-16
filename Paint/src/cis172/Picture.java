@@ -3,6 +3,7 @@ package cis172.Paint;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -51,15 +52,17 @@ public class Picture extends JPanel {
 	}
 
 	public void configMouseListener() {
-
-		addMouseMotionListener(new MouseAdapter() {
-			private Shape d1 = null;
-
+		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (currentTool == ToolOpt.PAINTCAN) {
 					setBackground(currentColor);
 				}
-			}
+			}});
+		addMouseMotionListener(new MouseAdapter() {
+			private Shape d1 = null;
+
+			
+			
 
 //			public void mousePressed(MouseEvent e) {
 //				if(currentTool == ToolOpt.RECTANGLE) {
@@ -87,53 +90,43 @@ public class Picture extends JPanel {
 					if(currentTool == ToolOpt.RECTANGLE) {
 						d1 = new Rectangle();
 					}
-//					d1 = new DrawingShape();
+					else if(currentTool == ToolOpt.CIRCLE) {
+						d1 = new Circle();
+					}
+					else if(currentTool == ToolOpt.LINE) {
+						d1 = new Line();
+					}
+					else if(currentTool == ToolOpt.TRIANGLE) {
+						d1 = new Triangle();
+					}
+
 					d1.setX(e.getX());
 					d1.setY(e.getY());
-
 					shapes.add(d1);
 					d1.setThickness(currentWidth);
 					d1.setColor(currentColor);
-					System.out.println("Shape added");
 
 				} else {
-					if (currentTool == ToolOpt.RECTANGLE) {
+					if (currentTool == ToolOpt.RECTANGLE || currentTool == ToolOpt.CIRCLE) {
 						if (d1.getX() > e.getX()) {
 							d1.setWidth(d1.getX() - e.getX());
-							d1.setX(e.getX());
+							//d1.setX(e.getX());
+							//System.out.println("d1 x > e x");
 						} else {
 							d1.setWidth(e.getX() - d1.getX());
 						}
 
 						if (d1.getY() > e.getY()) {
 							d1.setHeight(d1.getY() - e.getY());
-							d1.setY(e.getY());
+							//d1.setY(e.getY());
 						} else {
 							d1.setHeight(e.getY() - d1.getY());
 						}
-					} else if (currentTool == ToolOpt.CIRCLE) {
-						if (d1.getX() > e.getX()) {
-							d1.setWidth(d1.getX() - e.getX());
-							d1.setX(e.getX());
-						} else {
-							d1.setWidth(e.getX() - d1.getX());
-						}
-
-						if (d1.getY() > e.getY()) {
-							d1.setHeight(d1.getY() - e.getY());
-							d1.setY(e.getY());
-						} else {
-							d1.setHeight(e.getY() - d1.getY());
-						}
-					} else if (currentTool == ToolOpt.LINE) {
+					} else if (currentTool == ToolOpt.LINE || currentTool == ToolOpt.TRIANGLE) {
 						d1.setWidth(e.getX());
 						d1.setHeight(e.getY());
-					} else if (currentTool == ToolOpt.TRIANGLE) {
-						d1.setWidth(e.getX());
-						d1.setHeight(e.getY());
-					}
+					} 
 					repaint(); 
-
 				}
 				
 //			public void mouseReleased(MouseEvent e) {
@@ -194,7 +187,7 @@ public class Picture extends JPanel {
 //			}
 //			
 			}
-			public void mouseReleased(MouseEvent e) {
+			public void mouseMoved(MouseEvent e) {
 				d1 = null; 
 			}
 
@@ -202,33 +195,45 @@ public class Picture extends JPanel {
 	}
 
 	public void export() {
-		// TODO: export image to a BMP, JPG, PNG, or other image format
-		// TODO: export image to a BMP, JPG, PNG, or other image format
+		// Define a fileChooser, a file to save the image to, and an output stream
 		JFileChooser fileChooser = new JFileChooser();
 		File fileToSaveTo = null;
 		BufferedOutputStream out = null;
+		
+		// Set the default directory 
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		// Check if a file was chosen
 		int result = fileChooser.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			fileToSaveTo = fileChooser.getSelectedFile();
 			System.out.println("Selected file: " + fileToSaveTo.getAbsolutePath());
+			try {
+				fileToSaveTo.createNewFile(); 
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-		// File exportPic = new File("picture.png");
+		// Create a buffferedImage and a 2D graphics
+		BufferedImage image = new BufferedImage(getWidth(), getHeight() , BufferedImage.TYPE_INT_RGB);
+		Graphics2D graphic = image.createGraphics();
+		// Paint the graphic based on the panel
+		paint(graphic);
 		try {
-			out = new BufferedOutputStream(new FileOutputStream("image.png"));
-			System.out.println("created outstream");
+			out = new BufferedOutputStream(new FileOutputStream(fileToSaveTo));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
+			// Write an image into the selected file
 			ImageIO.write(image, "png", out);
-			System.out.println("Wrote to file");
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		// System.out.println("File created");
+		try {
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Getters and setters for private variables
