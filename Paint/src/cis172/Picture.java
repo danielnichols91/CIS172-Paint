@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import java.lang.Math;
 
 import cis172.Paint.Picture.ToolOpt;
 
@@ -51,15 +52,17 @@ public class Picture extends JPanel {
 	}
 
 	public void configMouseListener() {
-
-		addMouseMotionListener(new MouseAdapter() {
-			private Shape d1 = null;
-
+		
+		addMouseListener(new MouseAdapter( ) {
 			public void mouseClicked(MouseEvent e) {
 				if (currentTool == ToolOpt.PAINTCAN) {
 					setBackground(currentColor);
 				}
 			}
+		});
+
+		addMouseMotionListener(new MouseAdapter() {
+			private Shape d1 = null;
 
 //			public void mousePressed(MouseEvent e) {
 //				if(currentTool == ToolOpt.RECTANGLE) {
@@ -86,8 +89,15 @@ public class Picture extends JPanel {
 				if (d1 == null) {
 					if(currentTool == ToolOpt.RECTANGLE) {
 						d1 = new Rectangle();
+					} else if (currentTool == ToolOpt.CIRCLE) {
+						d1 = new Circle();
+					} else if (currentTool == ToolOpt.TRIANGLE) {
+						d1 = new Triangle();
+					} else if (currentTool == ToolOpt.LINE) {
+						d1 = new Line();
 					}
-//					d1 = new DrawingShape();
+		
+					
 					d1.setX(e.getX());
 					d1.setY(e.getY());
 
@@ -97,34 +107,9 @@ public class Picture extends JPanel {
 					System.out.println("Shape added");
 
 				} else {
-					if (currentTool == ToolOpt.RECTANGLE) {
-						if (d1.getX() > e.getX()) {
-							d1.setWidth(d1.getX() - e.getX());
-							d1.setX(e.getX());
-						} else {
-							d1.setWidth(e.getX() - d1.getX());
-						}
-
-						if (d1.getY() > e.getY()) {
-							d1.setHeight(d1.getY() - e.getY());
-							d1.setY(e.getY());
-						} else {
-							d1.setHeight(e.getY() - d1.getY());
-						}
-					} else if (currentTool == ToolOpt.CIRCLE) {
-						if (d1.getX() > e.getX()) {
-							d1.setWidth(d1.getX() - e.getX());
-							d1.setX(e.getX());
-						} else {
-							d1.setWidth(e.getX() - d1.getX());
-						}
-
-						if (d1.getY() > e.getY()) {
-							d1.setHeight(d1.getY() - e.getY());
-							d1.setY(e.getY());
-						} else {
-							d1.setHeight(e.getY() - d1.getY());
-						}
+					if (currentTool == ToolOpt.RECTANGLE || currentTool == ToolOpt.CIRCLE) {
+						d1.setWidth(Math.abs(d1.getX() - e.getX()));
+						d1.setHeight(Math.abs(d1.getY() - e.getY()));
 					} else if (currentTool == ToolOpt.LINE) {
 						d1.setWidth(e.getX());
 						d1.setHeight(e.getY());
@@ -194,7 +179,7 @@ public class Picture extends JPanel {
 //			}
 //			
 			}
-			public void mouseReleased(MouseEvent e) {
+			public void mouseMoved(MouseEvent e) {
 				d1 = null; 
 			}
 

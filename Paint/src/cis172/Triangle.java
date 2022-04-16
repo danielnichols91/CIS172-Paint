@@ -13,18 +13,9 @@ public class Triangle extends Shape{
 		int x3; 
 		int y3;
 		
-		if (getX() > getWidth()) {
-			x3 = getWidth() - (getX() - getWidth());
-		} else {
-			x3 = getX() - (getWidth() - getX());
-		}
-		
-		if (getY() > getHeight()) {
-			y3 = getY();
-		} else {
-			y3 = getHeight();
-		}
-		
+		x3 = Math.abs(getWidth() - (getX() - getWidth()));
+		y3 = Math.abs(getHeight() - getY());
+			
 		g.setColor(getColor());
 		g2d.setStroke(new BasicStroke(getThickness()));
 		g.drawPolygon(new int[] {getX(), getWidth(), x3}, new int[] {getY(), getHeight(), y3}, 3);
