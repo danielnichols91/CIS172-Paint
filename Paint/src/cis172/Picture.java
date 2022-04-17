@@ -3,7 +3,6 @@ package cis172.Paint;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import java.lang.Math;
 
 import cis172.Paint.Picture.ToolOpt;
 
@@ -52,17 +52,17 @@ public class Picture extends JPanel {
 	}
 
 	public void configMouseListener() {
-		addMouseListener(new MouseAdapter() {
+		
+		addMouseListener(new MouseAdapter( ) {
 			public void mouseClicked(MouseEvent e) {
 				if (currentTool == ToolOpt.PAINTCAN) {
 					setBackground(currentColor);
 				}
-			}});
+			}
+		});
+
 		addMouseMotionListener(new MouseAdapter() {
 			private Shape d1 = null;
-
-			
-			
 
 //			public void mousePressed(MouseEvent e) {
 //				if(currentTool == ToolOpt.RECTANGLE) {
@@ -89,44 +89,36 @@ public class Picture extends JPanel {
 				if (d1 == null) {
 					if(currentTool == ToolOpt.RECTANGLE) {
 						d1 = new Rectangle();
-					}
-					else if(currentTool == ToolOpt.CIRCLE) {
+					} else if (currentTool == ToolOpt.CIRCLE) {
 						d1 = new Circle();
-					}
-					else if(currentTool == ToolOpt.LINE) {
+					} else if (currentTool == ToolOpt.TRIANGLE) {
+						d1 = new Triangle();
+					} else if (currentTool == ToolOpt.LINE) {
 						d1 = new Line();
 					}
-					else if(currentTool == ToolOpt.TRIANGLE) {
-						d1 = new Triangle();
-					}
-
+		
+					
 					d1.setX(e.getX());
 					d1.setY(e.getY());
+
 					shapes.add(d1);
 					d1.setThickness(currentWidth);
 					d1.setColor(currentColor);
+					System.out.println("Shape added");
 
 				} else {
 					if (currentTool == ToolOpt.RECTANGLE || currentTool == ToolOpt.CIRCLE) {
-						if (d1.getX() > e.getX()) {
-							d1.setWidth(d1.getX() - e.getX());
-							//d1.setX(e.getX());
-							//System.out.println("d1 x > e x");
-						} else {
-							d1.setWidth(e.getX() - d1.getX());
-						}
-
-						if (d1.getY() > e.getY()) {
-							d1.setHeight(d1.getY() - e.getY());
-							//d1.setY(e.getY());
-						} else {
-							d1.setHeight(e.getY() - d1.getY());
-						}
-					} else if (currentTool == ToolOpt.LINE || currentTool == ToolOpt.TRIANGLE) {
+						d1.setWidth(Math.abs(d1.getX() - e.getX()));
+						d1.setHeight(Math.abs(d1.getY() - e.getY()));
+					} else if (currentTool == ToolOpt.LINE) {
 						d1.setWidth(e.getX());
 						d1.setHeight(e.getY());
-					} 
+					} else if (currentTool == ToolOpt.TRIANGLE) {
+						d1.setWidth(e.getX());
+						d1.setHeight(e.getY());
+					}
 					repaint(); 
+
 				}
 				
 //			public void mouseReleased(MouseEvent e) {
@@ -195,45 +187,33 @@ public class Picture extends JPanel {
 	}
 
 	public void export() {
-		// Define a fileChooser, a file to save the image to, and an output stream
+		// TODO: export image to a BMP, JPG, PNG, or other image format
+		// TODO: export image to a BMP, JPG, PNG, or other image format
 		JFileChooser fileChooser = new JFileChooser();
 		File fileToSaveTo = null;
 		BufferedOutputStream out = null;
-		
-		// Set the default directory 
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-		// Check if a file was chosen
 		int result = fileChooser.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			fileToSaveTo = fileChooser.getSelectedFile();
 			System.out.println("Selected file: " + fileToSaveTo.getAbsolutePath());
-			try {
-				fileToSaveTo.createNewFile(); 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
-		// Create a buffferedImage and a 2D graphics
-		BufferedImage image = new BufferedImage(getWidth(), getHeight() , BufferedImage.TYPE_INT_RGB);
-		Graphics2D graphic = image.createGraphics();
-		// Paint the graphic based on the panel
-		paint(graphic);
+		BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		// File exportPic = new File("picture.png");
 		try {
-			out = new BufferedOutputStream(new FileOutputStream(fileToSaveTo));
+			out = new BufferedOutputStream(new FileOutputStream("image.png"));
+			System.out.println("created outstream");
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			// Write an image into the selected file
 			ImageIO.write(image, "png", out);
+			System.out.println("Wrote to file");
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		try {
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// System.out.println("File created");
 	}
 
 	// Getters and setters for private variables
