@@ -3,6 +3,7 @@ package cis172.Paint;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -187,33 +188,44 @@ public class Picture extends JPanel {
 	}
 
 	public void export() {
-		// TODO: export image to a BMP, JPG, PNG, or other image format
-		// TODO: export image to a BMP, JPG, PNG, or other image format
+		// Define a fileChooser, a file to save the image to, and an output stream
 		JFileChooser fileChooser = new JFileChooser();
 		File fileToSaveTo = null;
 		BufferedOutputStream out = null;
+		// Set the default directory 
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		// Check if a file was chosen
 		int result = fileChooser.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			fileToSaveTo = fileChooser.getSelectedFile();
 			System.out.println("Selected file: " + fileToSaveTo.getAbsolutePath());
+			try {
+				fileToSaveTo.createNewFile(); 
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-		// File exportPic = new File("picture.png");
+		// Create a buffferedImage and a 2D graphics
+		BufferedImage image = new BufferedImage(getWidth(), getHeight() , BufferedImage.TYPE_INT_RGB);
+		Graphics2D graphic = image.createGraphics();
+		// Paint the graphic based on the panel
+		paint(graphic);
 		try {
-			out = new BufferedOutputStream(new FileOutputStream("image.png"));
-			System.out.println("created outstream");
+			out = new BufferedOutputStream(new FileOutputStream(fileToSaveTo));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
+			// Write an image into the selected file
 			ImageIO.write(image, "png", out);
-			System.out.println("Wrote to file");
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		// System.out.println("File created");
+		try {
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Getters and setters for private variables
