@@ -18,5 +18,11 @@ public class Circle extends Shape{
 		g.drawOval(getX(), getY(), getWidth(), getHeight());
 		
 	}
+	
+	// Overloading draw specifically for pen function
+	public void draw(Graphics g, String r) {
+		g.setColor(getColor());
+		g.fillOval(getX(), getY(), getWidth(), getHeight());
+	}
 
 }

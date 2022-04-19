@@ -23,6 +23,7 @@ public class ToolBar extends JPanel implements ActionListener{
 	private ToolBarButton triangleBtn;
 	private ToolBarButton rectangleBtn;
 	private ToolBarButton lineBtn;
+	private ToolBarButton penBtn;
 	private ToolBarButton eraserBtn;
 	private ToolBarButton exportBtn;
 	private JComboBox thicknessMenu;
@@ -77,6 +78,20 @@ public class ToolBar extends JPanel implements ActionListener{
 	    lineIcon= new ImageIcon(resizedImage);
 		lineBtn.setIcon(lineIcon);
 		
+		// Format the pen button
+		penBtn = new ToolBarButton();
+		penBtn.setPreferredSize(new Dimension(50,50));
+		penBtn.addActionListener(this);
+		penBtn.setToolTipText("Click and drag to use pen");
+		ImageIcon penIcon = new ImageIcon("penIcon.png");
+		// Resize the image to fit the button
+		Image penImg = penIcon.getImage();  
+	    resizedImage = penImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+	    penIcon= new ImageIcon(resizedImage);
+		penBtn.setIcon(penIcon);
+		penBtn.setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
+		penBtn.setBorderPainted(false);
+		
 		// Format the eraser button
 		eraserBtn = new ToolBarButton();
 		eraserBtn.addActionListener(this);
@@ -130,6 +145,7 @@ public class ToolBar extends JPanel implements ActionListener{
 		this.add(triangleBtn);
 		this.add(rectangleBtn);
 		this.add(lineBtn);
+		this.add(penBtn);
 		this.add(eraserBtn);
 		this.add(thicknessMenu);
 		this.add(paintCanBtn);
@@ -173,6 +189,7 @@ public class ToolBar extends JPanel implements ActionListener{
 			rectangleBtn.setBorderPainted(false);
 			triangleBtn.setBorderPainted(false);
 			lineBtn.setBorderPainted(false);
+			penBtn.setBorderPainted(false);
 			eraserBtn.setBorderPainted(false);
 			paintCanBtn.setBorderPainted(false);
 			
@@ -215,6 +232,12 @@ public class ToolBar extends JPanel implements ActionListener{
 				picture.setCurrentTool(ToolOpt.PAINTCAN);
 				// Highlight the border of the selected tool 
 				paintCanBtn.setBorderPainted(true);
+			}
+			else if (e.getSource()== penBtn) {
+				// Set the currentTool to PEN
+				picture.setCurrentTool(ToolOpt.PEN);
+				// Highlight the border of the selected tool
+				penBtn.setBorderPainted(true);
 			}
 		}
 	}

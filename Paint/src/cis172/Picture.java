@@ -24,7 +24,7 @@ public class Picture extends JPanel {
 
 	// List all the options of tools that can be selected
 	enum ToolOpt {
-		RECTANGLE, CIRCLE, LINE, TRIANGLE, ERASER, PAINTCAN
+		RECTANGLE, CIRCLE, LINE, TRIANGLE, PEN, ERASER, PAINTCAN
 	}
 
 	// List the attributes needed for Picture
@@ -75,26 +75,6 @@ public class Picture extends JPanel {
 		addMouseMotionListener(new MouseAdapter() {
 			private Shape d1 = null;
 
-//			public void mousePressed(MouseEvent e) {
-//				if(currentTool == ToolOpt.RECTANGLE) {
-//					d1.setX(e.getX());
-//					d1.setY(e.getY());
-//				}
-//				else if(currentTool == ToolOpt.CIRCLE) {
-//					c1.setX(e.getX());
-//					c1.setY(e.getY());
-//				}
-//				else if(currentTool == ToolOpt.LINE) {
-//					l1.setX(e.getX());
-//					l1.setY(e.getY());
-//				}
-//				else if(currentTool == ToolOpt.TRIANGLE) {
-//					t1.setX(e.getX());
-//					t1.setY(e.getY());
-//				}
-//				
-//			}
-
 			public void mouseDragged(MouseEvent e) {
 
 				if (d1 == null) {
@@ -110,6 +90,9 @@ public class Picture extends JPanel {
 						assert(d1 instanceof Shape);
 					} else if (currentTool == ToolOpt.LINE) {
 						d1 = new Line();
+						assert(d1 instanceof Shape);
+					} else if (currentTool == ToolOpt.PEN) {
+						d1 = new Pen();
 						assert(d1 instanceof Shape);
 					}
 		
@@ -131,68 +114,14 @@ public class Picture extends JPanel {
 					} else if (currentTool == ToolOpt.TRIANGLE) {
 						d1.setWidth(e.getX());
 						d1.setHeight(e.getY());
+					} else if (currentTool == ToolOpt.PEN) {
+						((Pen) d1).addPoint(e.getX(), e.getY());
 					}
+					
 					repaint(); 
 
 				}
-				
-//			public void mouseReleased(MouseEvent e) {
-//				if(currentTool == ToolOpt.RECTANGLE) {
-//					if (r1.getX() > e.getX()) {
-//						r1.setWidth(r1.getX() - e.getX());
-//						r1.setX(e.getX());
-//					} else {
-//						r1.setWidth(e.getX() - r1.getX());
-//					}
-//				
-//					if (r1.getY() > e.getY()) {
-//						r1.setHeight(r1.getY() - e.getY());
-//						r1.setY(e.getY());
-//					} else {
-//						r1.setHeight(e.getY() - r1.getY());
-//					}
-//				
-//					shapes.add(r1);
-//					r1.setThickness(currentWidth);
-//					r1.setColor(currentColor);
-//					r1.draw(getGraphics());
-//				} else if(currentTool == ToolOpt.CIRCLE ) {
-//					if (c1.getX() > e.getX()) {
-//						c1.setWidth(c1.getX() - e.getX());
-//						c1.setX(e.getX());
-//					} else {
-//						c1.setWidth(e.getX() - c1.getX());
-//					}
-//					
-//					if (c1.getY() > e.getY()) {
-//						c1.setHeight(c1.getY() - e.getY());
-//						c1.setY(e.getY());
-//					} else {
-//						c1.setHeight(e.getY() - c1.getY());
-//					}
-//					
-//
-//
-//					c1.draw(getGraphics());
-//				} else if(currentTool == ToolOpt.LINE ) {
-//					l1.setWidth(e.getX());
-//					l1.setHeight(e.getY());
-//					
-//					shapes.add(l1);
-//					l1.setThickness(currentWidth);
-//					l1.setColor(currentColor);
-//					l1.draw(getGraphics());
-//				} else if(currentTool == ToolOpt.TRIANGLE ) {
-//					t1.setWidth(e.getX());
-//					t1.setHeight(e.getY());
-//					
-//					shapes.add(t1);
-//					t1.setThickness(currentWidth);
-//					t1.setColor(currentColor);
-//					t1.draw(getGraphics());
-//				} 
-//			}
-//			
+		
 			}
 			public void mouseMoved(MouseEvent e) {
 				d1 = null; 
