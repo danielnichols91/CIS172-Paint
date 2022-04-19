@@ -91,7 +91,7 @@ public class Picture extends JPanel {
 					} else if (currentTool == ToolOpt.LINE) {
 						d1 = new Line();
 						assert(d1 instanceof Shape);
-					} else if (currentTool == ToolOpt.PEN) {
+					} else if (currentTool == ToolOpt.PEN || currentTool == ToolOpt.ERASER) {
 						d1 = new Pen();
 						assert(d1 instanceof Shape);
 					}
@@ -102,7 +102,12 @@ public class Picture extends JPanel {
 
 					shapes.add(d1);
 					d1.setThickness(currentWidth);
-					d1.setColor(currentColor);
+					
+					if (currentTool == ToolOpt.ERASER) {
+						d1.setColor(Color.WHITE);
+					} else {
+						d1.setColor(currentColor);
+					}
 
 				} else {
 					if (currentTool == ToolOpt.RECTANGLE || currentTool == ToolOpt.CIRCLE) {
@@ -114,9 +119,9 @@ public class Picture extends JPanel {
 					} else if (currentTool == ToolOpt.TRIANGLE) {
 						d1.setWidth(e.getX());
 						d1.setHeight(e.getY());
-					} else if (currentTool == ToolOpt.PEN) {
+					} else if (currentTool == ToolOpt.PEN || currentTool == ToolOpt.ERASER) {
 						((Pen) d1).addPoint(e.getX(), e.getY());
-					}
+					} 
 					
 					repaint(); 
 
