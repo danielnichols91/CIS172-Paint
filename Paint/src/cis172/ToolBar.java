@@ -19,23 +19,22 @@ public class ToolBar extends JPanel implements ActionListener{
 	private Picture picture;
 	
 	// Define all of the components for the toolBar
-	private JButton circleBtn;
-	private JButton triangleBtn;
-	private JButton rectangleBtn;
-	private JButton lineBtn;
-	private JButton eraserBtn;
-	private JButton exportBtn;
+	private ToolBarButton circleBtn;
+	private ToolBarButton triangleBtn;
+	private ToolBarButton rectangleBtn;
+	private ToolBarButton lineBtn;
+	private ToolBarButton eraserBtn;
+	private ToolBarButton exportBtn;
 	private JComboBox thicknessMenu;
-	private JButton paintCanBtn;
-	private JButton selectColorBtn;
+	private ToolBarButton paintCanBtn;
+	private ToolBarButton selectColorBtn;
 	private JPanel currentColorDisplay;
 	
 	public ToolBar(Picture picture) {
 		this.picture = picture; 
 		
 		// Format the circle button 
-		circleBtn = new JButton();
-		circleBtn.setPreferredSize(new Dimension(50,50));
+		circleBtn = new ToolBarButton();
 		circleBtn.addActionListener(this);
 		ImageIcon circleIcon = new ImageIcon("circleIcon.png"); 
 		circleBtn.setToolTipText("Click and drag to draw a circle");
@@ -44,12 +43,9 @@ public class ToolBar extends JPanel implements ActionListener{
 	    Image resizedImage = circleImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 	    circleIcon= new ImageIcon(resizedImage);
 		circleBtn.setIcon(circleIcon);
-		circleBtn.setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
-		circleBtn.setBorderPainted(false);
 		
 		// Format the triangle button
-		triangleBtn = new JButton();
-		triangleBtn.setPreferredSize(new Dimension(50,50));
+		triangleBtn = new ToolBarButton();
 		triangleBtn.addActionListener(this);
 		ImageIcon triangleIcon = new ImageIcon("triangleIcon.png"); 
 		triangleBtn.setToolTipText("Click and drag to draw a triangle");
@@ -58,12 +54,9 @@ public class ToolBar extends JPanel implements ActionListener{
 	    resizedImage = triangleImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 	    triangleIcon= new ImageIcon(resizedImage);
 		triangleBtn.setIcon(triangleIcon);
-		triangleBtn.setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
-		triangleBtn.setBorderPainted(false);
 		
 		// Format the rectangle button
-		rectangleBtn = new JButton();
-		rectangleBtn.setPreferredSize(new Dimension(50,50));
+		rectangleBtn = new ToolBarButton();
 		rectangleBtn.addActionListener(this);
 		rectangleBtn.setToolTipText("Click and drag to draw a rectangle");
 		ImageIcon rectangleIcon = new ImageIcon("rectangleIcon.png");
@@ -72,12 +65,9 @@ public class ToolBar extends JPanel implements ActionListener{
 	    resizedImage = rectangleImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 	    rectangleIcon= new ImageIcon(resizedImage);
 		rectangleBtn.setIcon(rectangleIcon);
-		rectangleBtn.setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
-		rectangleBtn.setBorderPainted(false);
 		
 		// Format the line button
-		lineBtn = new JButton();
-		lineBtn.setPreferredSize(new Dimension(50,50));
+		lineBtn = new ToolBarButton();
 		lineBtn.addActionListener(this);
 		lineBtn.setToolTipText("Click and drag to draw a line");
 		ImageIcon lineIcon = new ImageIcon("lineIcon.png");
@@ -86,12 +76,9 @@ public class ToolBar extends JPanel implements ActionListener{
 	    resizedImage = lineImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 	    lineIcon= new ImageIcon(resizedImage);
 		lineBtn.setIcon(lineIcon);
-		lineBtn.setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
-		lineBtn.setBorderPainted(false);
 		
 		// Format the eraser button
-		eraserBtn = new JButton();
-		eraserBtn.setPreferredSize(new Dimension(50,50));
+		eraserBtn = new ToolBarButton();
 		eraserBtn.addActionListener(this);
 		eraserBtn.setToolTipText("Click and drag to erase");
 		ImageIcon eraserIcon = new ImageIcon("eraserIcon.png");
@@ -100,12 +87,9 @@ public class ToolBar extends JPanel implements ActionListener{
 	    resizedImage = eraserImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 	    eraserIcon= new ImageIcon(resizedImage);
 		eraserBtn.setIcon(eraserIcon);
-		eraserBtn.setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
-		eraserBtn.setBorderPainted(false);
 		
 		// Format the export button
-		exportBtn = new JButton();
-		exportBtn.setPreferredSize(new Dimension(50,50));
+		exportBtn = new ToolBarButton();
 		exportBtn.addActionListener(this);
 		exportBtn.setToolTipText("Export your picture");
 		ImageIcon exportIcon = new ImageIcon("exportIcon.png");
@@ -122,22 +106,18 @@ public class ToolBar extends JPanel implements ActionListener{
 		thicknessMenu.setToolTipText("Select weight/thickness");
 		
 		// Format the paintCan Button 
-		paintCanBtn = new JButton();
-		paintCanBtn.setPreferredSize(new Dimension(50,50));
+		paintCanBtn = new ToolBarButton();
 		paintCanBtn.addActionListener(this);
-		paintCanBtn.setToolTipText("Click to fill any shape with selected color");
+		paintCanBtn.setToolTipText("Click to paint the backgroud with selected color");
 		ImageIcon paintCanIcon = new ImageIcon("paintCanIcon.png");
 		// Resize the image to fit the button
 		Image paintCanImg = paintCanIcon.getImage();  
 	    resizedImage = paintCanImg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 	    paintCanIcon= new ImageIcon(resizedImage);
 		paintCanBtn.setIcon(paintCanIcon);
-		paintCanBtn.setBorder(BorderFactory.createLineBorder(Color.BLUE,3));
-		paintCanBtn.setBorderPainted(false);
 		
 		// Format the selectColor Button 
-		selectColorBtn = new JButton();
-		selectColorBtn.setPreferredSize(new Dimension(50,50));
+		selectColorBtn = new ToolBarButton();
 		selectColorBtn.addActionListener(this);
 		currentColorDisplay = new JPanel();
 		currentColorDisplay.setSize(new Dimension(40,40));

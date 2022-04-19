@@ -42,6 +42,16 @@ public class Picture extends JPanel {
 		
 		configMouseListener();
 	}
+	// Overload the constructor for Picture to set default values
+	public Picture(Color color, int width) {
+		// Give default values to attributes
+				shapes = new ArrayList<Shape>();
+				currentColor = color;
+				currentWidth = width;
+				currentTool = null;
+				
+				configMouseListener();
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -90,12 +100,17 @@ public class Picture extends JPanel {
 				if (d1 == null) {
 					if(currentTool == ToolOpt.RECTANGLE) {
 						d1 = new Rectangle();
+						// Use instanceof to assert the values of d1 are shapes
+						assert(d1 instanceof Shape);
 					} else if (currentTool == ToolOpt.CIRCLE) {
 						d1 = new Circle();
+						assert(d1 instanceof Shape);
 					} else if (currentTool == ToolOpt.TRIANGLE) {
 						d1 = new Triangle();
+						assert(d1 instanceof Shape);
 					} else if (currentTool == ToolOpt.LINE) {
 						d1 = new Line();
+						assert(d1 instanceof Shape);
 					}
 		
 					
@@ -105,7 +120,6 @@ public class Picture extends JPanel {
 					shapes.add(d1);
 					d1.setThickness(currentWidth);
 					d1.setColor(currentColor);
-					System.out.println("Shape added");
 
 				} else {
 					if (currentTool == ToolOpt.RECTANGLE || currentTool == ToolOpt.CIRCLE) {
