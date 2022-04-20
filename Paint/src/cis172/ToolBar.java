@@ -1,4 +1,4 @@
-package cis172.Paint;
+package cis172;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import cis172.Paint.Picture.ToolOpt;
+import cis172.Picture.ToolOpt;
 
 public class ToolBar extends JPanel implements ActionListener{
 
@@ -244,6 +244,11 @@ public class ToolBar extends JPanel implements ActionListener{
 				penBtn.setBorderPainted(true);
 			}
 		}
+	}
+
+
+	public ToolBarButton getCircleBtn() {
+		return circleBtn;
 	}
 	
 	

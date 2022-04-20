@@ -1,4 +1,4 @@
-package cis172.Paint;
+package cis172;
 
 import java.util.ArrayList;
 import java.awt.Color;
@@ -16,14 +16,15 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import java.lang.Math;
 
-import cis172.Paint.Picture.ToolOpt;
+import cis172.Picture.ToolOpt;
+
+import java.lang.Math;
 
 public class Picture extends JPanel {
 
 	// List all the options of tools that can be selected
-	enum ToolOpt {
+	public enum ToolOpt {
 		RECTANGLE, CIRCLE, LINE, TRIANGLE, PEN, ERASER, PAINTCAN
 	}
 
