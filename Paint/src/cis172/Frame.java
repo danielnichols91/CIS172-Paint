@@ -14,6 +14,9 @@ public class Frame extends JFrame {
 	
 	private static Picture picture; 
 	
+	/**
+	 * Creates a new Frame.
+	 */
 	public Frame() {
 		// Format the Frame or window itself
 		this.setTitle("Paint");

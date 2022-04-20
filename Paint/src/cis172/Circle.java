@@ -6,8 +6,6 @@ import java.awt.Graphics2D;
 
 public class Circle extends Shape{
 
-	
-	@Override
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		if(getColor()==null) {
@@ -19,6 +17,11 @@ public class Circle extends Shape{
 		
 	}
 	
+	/**
+	 * Draws filled circles specifically for the pen function.
+	 * @param g
+	 * @param r
+	 */
 	// Overloading draw specifically for pen function
 	public void draw(Graphics g, String r) {
 		g.setColor(getColor());

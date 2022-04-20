@@ -31,6 +31,10 @@ public class ToolBar extends JPanel implements ActionListener{
 	private ToolBarButton selectColorBtn;
 	private JPanel currentColorDisplay;
 	
+	/**
+	 * Creates a new toolbar.
+	 * @param picture
+	 */
 	public ToolBar(Picture picture) {
 		this.picture = picture; 
 		

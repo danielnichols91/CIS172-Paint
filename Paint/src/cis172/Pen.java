@@ -17,6 +17,11 @@ public class Pen extends Shape {
 		
 	}
 	
+	/**
+	 * Adds a new circle for each movement when using the pen tool.
+	 * @param x
+	 * @param y
+	 */
 	public void addPoint(int x, int y) {
 		Circle s = new Circle();
 		
@@ -29,6 +34,9 @@ public class Pen extends Shape {
 		traces.add(s);
 	}
 	
+	/**
+	 * Creates a Pen class that instantiates traces.
+	 */
 	public Pen() {
 		traces = new ArrayList<Circle>();
 		

@@ -33,6 +33,9 @@ public class Picture extends JPanel {
 	private Color currentColor;
 	private int currentWidth;
 
+	/**
+	 * Creates a new Picture in Frame.
+	 */
 	public Picture() {
 		// Give default values to attributes
 		shapes = new ArrayList<Shape>();
@@ -42,7 +45,12 @@ public class Picture extends JPanel {
 		
 		configMouseListener();
 	}
-	// Overload the constructor for Picture to set default values
+	
+	/**
+	 * Overloads the constructor for Picture to set default values
+	 * @param color
+	 * @param width
+	 */
 	public Picture(Color color, int width) {
 		// Give default values to attributes
 				shapes = new ArrayList<Shape>();
@@ -104,7 +112,7 @@ public class Picture extends JPanel {
 					d1.setThickness(currentWidth);
 					
 					if (currentTool == ToolOpt.ERASER) {
-						d1.setColor(Color.WHITE);
+						d1.setColor(getBackground());
 					} else {
 						d1.setColor(currentColor);
 					}
@@ -135,6 +143,9 @@ public class Picture extends JPanel {
 		});
 	}
 
+	/**
+	 * Saves and exports a file of Picture.
+	 */
 	public void export() {
 		// Define a fileChooser, a file to save the image to, and an output stream
 		JFileChooser fileChooser = new JFileChooser();
@@ -177,30 +188,58 @@ public class Picture extends JPanel {
 	}
 
 	// Getters and setters for private variables
+	/**
+	 * Returns Shapes held in Picture.
+	 * @return shapes
+	 */
 	public ArrayList<Shape> getShapes() {
 		return shapes;
 	}
 
+	/**
+	 * Returns currentTool.
+	 * @return currentTool
+	 */
 	public static ToolOpt getCurrentTool() {
 		return currentTool;
 	}
 
+	/**
+	 * Sets currentTool.
+	 * @param currentTool
+	 */
 	public void setCurrentTool(ToolOpt currentTool) {
 		this.currentTool = currentTool;
 	}
 
+	/**
+	 * Returns currentColor.
+	 * @return currentColor
+	 */
 	public Color getCurrentColor() {
 		return currentColor;
 	}
 
+	/**
+	 * Sets currentColor.
+	 * @param currentColor
+	 */
 	public void setCurrentColor(Color currentColor) {
 		this.currentColor = currentColor;
 	}
 
+	/**
+	 * Returns current width of stroke.
+	 * @return currentWidth
+	 */
 	public int getCurrentWidth() {
 		return currentWidth;
 	}
 
+	/**
+	 * Sets current width of stroke.
+	 * @param currentWidth
+	 */
 	public void setCurrentWidth(int currentWidth) {
 		this.currentWidth = currentWidth;
 	}
