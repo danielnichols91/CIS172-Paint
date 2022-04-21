@@ -1,4 +1,4 @@
-package cis172.Paint;
+package cis172;
 
 public class Main {
 
