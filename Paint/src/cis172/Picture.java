@@ -1,4 +1,4 @@
-package cis172;
+package cis172.Paint;
 
 import java.util.ArrayList;
 import java.awt.Color;
