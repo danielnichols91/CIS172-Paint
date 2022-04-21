@@ -1,4 +1,4 @@
-package cis172.Paint;
+package cis172;
 
 import java.awt.BasicStroke;
 
