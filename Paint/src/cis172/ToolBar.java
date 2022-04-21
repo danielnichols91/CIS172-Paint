@@ -7,7 +7,6 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Image; 
-import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -249,6 +248,16 @@ public class ToolBar extends JPanel implements ActionListener{
 
 	public ToolBarButton getCircleBtn() {
 		return circleBtn;
+	}
+
+
+	public ToolBarButton getRectangleBtn() {
+		return rectangleBtn;
+	}
+
+
+	public ToolBarButton getTriangleBtn() {
+		return triangleBtn;
 	}
 	
 	
